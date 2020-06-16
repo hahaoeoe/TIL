@@ -40,7 +40,7 @@
 
 ##  Latent space; 잠재 공간
 
- 
+ http://terryum.io/korean/2016/05/05/FeatureSelection_KOR/
 
 
 
@@ -49,6 +49,10 @@
 ##  Omics; 오믹스
 
 오믹스(omics)는 전체를 뜻하는 말인 옴(-ome)과 학문을 뜻하는 접미사 익스(-ics)가 결합된 말로, 어떤 특정 학문 분야를 말하기보다는 개별 [유전자](https://terms.naver.com/entry.nhn?docId=5141493&ref=y)(gene), 전사물(transcript), [단백질](https://terms.naver.com/entry.nhn?docId=5141336&ref=y)(protein), 대사물(metabolite) 연구에 대비되는 총체적인 개념의 데이터 세트를 바탕으로 하는 생물학 분야라고 할 수 있다. ‘~옴’은 우리말로 전체를 지칭하는 ‘~체’로 번역된다. 오믹스(omics)는 [인간유전체 사업](https://terms.naver.com/entry.nhn?docId=5141544&ref=y)(human genome project) 이후 새롭게 등장한 학문 분야로 몇 가지 측면에서 전통적 생물학 연구와 대비된다. 오믹스에서 다루는 데이터는 대규모-대용량(high-throughput) 기술들로 생산되기 때문에 개별 물질을 연구 대상으로 하는 전통적인 생물학과 달리 데이터의 전산학적 처리가 필수적이다. 또 수학적, 통계적 기법이 연구에 적극 활용된다. 이러한 요구로 생겨난 새로운 학문 분야가 바로 [생물정보학](https://terms.naver.com/entry.nhn?docId=5141510&ref=y)(bioinformatics)이다.
+
+
+
+
 
 <br>
 
@@ -80,3 +84,4 @@ https://terms.naver.com/entry.nhn?docId=5141548&cid=60266&categoryId=60266
 
 
 
+https://blog.naver.com/vaneco/221965086089
