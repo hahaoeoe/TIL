@@ -48,7 +48,7 @@
 
 ­‘z’ 벡터가 존재하는 공간을 잠재 공간(Latent Space)이라고도 부른다. 여기서는 잠재 공간의 크기를 임의로 100차원으로 뒀다. 잠재 공간의 크기에는 제한이 없으나 나타내려고 하는 대상의 정보를 충분히 담을 수 있을 만큼은 커야 한다. GAN은 우리가 이해할 수는 없는 방식이지만 ‘z’ 벡터의 값을 이미지의 속성에 매핑시키기 때문이다. 뒤에 살펴볼 GAN의 파생 모델에서 잠재 공간의 의미를 더욱 자세히 이해할 수 있을 것이다.
 
-<img src="https://files.slack.com/files-pri/T25783BPY-F9RFJ3VDJ/picture4.png?pub_secret=da0323f283" alt="그림4: 생성자는 단순한 분포를 복잡한 분포로 매핑하는 함수다." style="zoom: 67%;" />
+<img src="https://files.slack.com/files-pri/T25783BPY-F9RFJ3VDJ/picture4.png?pub_secret=da0323f283" alt="그림4: 생성자는 단순한 분포를 복잡한 분포로 매핑하는 함수다." style="zoom: 50%;" />
 
 > ­생성자는 단순한 분포를 복잡한 분포로 매핑하는 함수다.
 
@@ -88,7 +88,7 @@ Finally, the points in the latent space can be kept and used in simple vector ar
 
  Alzheimer’s Disease 증세를 유발하는 독성 뇌 단백질 아밀로이드베타(Amyloid-beta)는 뇌에 축적됨으로써 신경세포가 손상을 입고 뇌 세포조직이 과도한 자극을 받게 된다는 것이다. 뇌 세포조직에 만성적인 염증이 발생함으로써 점진적으로 신경세포가 손상을 입게 되고 Alzheimer’s Disease 의 증상이 유도되는 것으로 알려져 있다. 
 
-<img src="https://sarahabdellahbrownuniversityalzheimers.weebly.com/uploads/5/2/5/3/52531031/normal-vs-alzheimers-brain-1_orig.jpg" alt="Main Characteristics of Alzheimer's - Neuroscience In Action ..." style="zoom: 67%;" />
+<img src="https://sarahabdellahbrownuniversityalzheimers.weebly.com/uploads/5/2/5/3/52531031/normal-vs-alzheimers-brain-1_orig.jpg" alt="Main Characteristics of Alzheimer's - Neuroscience In Action ..." style="zoom: 50%;" />
 
 <br>
 
@@ -291,7 +291,7 @@ baySeq와 EBSeq은 역시 nega-tive binomial model에 기반하고 있는 Bayesi
 
 > [ [그림 2](https://hackernoon.com/memorizing-is-not-learning-6-tricks-to-prevent-overfitting-in-machine-learning-820b091dc42) ] 데이터가 많아질수록 과적합 문제가 발생할 가능성이 낮아진다. © [Julien Despois](https://hackernoon.com/@juliendespois)
 
-<img src="C:\Users\Owner\Desktop\그림3.png" style="zoom:67%;" />
+<img src="https://www.aitimes.kr/news/photo/201804/11629_11423_146.png" alt="적대적 생성 신경망(GAN)을 이용한 프레임 워크, 무니트(MUNIT) 공개 ..." style="zoom:50%;" />
 
 > [ [그림 3 ](https://raw.githubusercontent.com/aleju/imgaug-doc/master/readme_images/examples_grid.jpg?raw=true)] 다양한 방식으로 변형해 새로 획득한 이미지를 학습 데이터로 활용한다. 
 
@@ -359,9 +359,9 @@ https://dreamgonfly.github.io/2018/03/17/gan-explained.html
 
 > GAN & Latent space 
 
-<br>
-
 https://www.samsungsds.com/global/ko/support/insights/Generative-adversarial-network-AI-2.html
+
+<br>
 
 **Latent space**
 
