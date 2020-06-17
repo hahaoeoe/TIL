@@ -313,10 +313,10 @@ baySeq와 EBSeq은 역시 nega-tive binomial model에 기반하고 있는 Bayesi
 * mediate 1. (중개하여) …을 달성하다, 성립시키다, 가져다 주다. 2. 〔분쟁·논쟁 따위〕를 조정하다, 해결하다. 3. (…을/…사이를) 조정하다, 중개하는 수고를 하다.
 * convergence 집중, 집합점, 수렴, 집합
 * extensively 널리, 광범위하게
-* manipulate
-* transition
-* epidermal cell
-* differentiation 
+* manipulate 조작하다, 처리하다, 조종하다.
+* transition 이행, 변화, 과도기
+* epidermal cell 상피세포
+* differentiation 분화
 * what if ~면 어쩌지?
 * contextual (글의) 전후 관계상의, 문맥상의
 * hinder 저해[방해]하다, ~을 못하게 하다.
@@ -346,8 +346,6 @@ baySeq와 EBSeq은 역시 nega-tive binomial model에 기반하고 있는 Bayesi
 * methodological 방법론적인
 * augmentation 논증
 * recapitulate 재현하다.
-
-
 
 <br>
 
