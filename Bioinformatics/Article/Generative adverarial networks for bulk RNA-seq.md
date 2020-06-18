@@ -10,7 +10,23 @@
 
 ## 요약
 
+WT와 AD state 2M, 4M, 7M mouse gene
 
+Amyloid beta & cholesterole biosynthesis 연관
+
+GAN을 통해서 real data에서 fake data 생성
+
+> fake data 생성(agumentation)을 진행  ==>> ????????????????????????????????????????????
+
+Data normalization을 TPM과 DESeq2의 rlog를 통해 진행
+
+
+
+??? 
+
+1. latent space interpoloation에서 agumentation ?
+2. DEGs는 언제 진행하나?
+3. 
 
 
 
@@ -295,6 +311,18 @@ baySeq와 EBSeq은 역시 nega-tive binomial model에 기반하고 있는 Bayesi
 
 > [ [그림 3 ](https://raw.githubusercontent.com/aleju/imgaug-doc/master/readme_images/examples_grid.jpg?raw=true)] 다양한 방식으로 변형해 새로 획득한 이미지를 학습 데이터로 활용한다. 
 
+![](C:\Users\Owner\Desktop\딥러닝.png)
+
+<br>
+
+
+
+## GO ; Gene Onotology
+
+유전자 기능 연구를 위해 개별 유전자(gene)에 대해 유전자가 관련된 세포 기작 유전자가 가지는 분자기능 및 유전자의 세포 내의 위치를 주석으로 달아 놓은 구조화된 모델이다.
+
+
+
 
 
 
@@ -346,6 +374,17 @@ baySeq와 EBSeq은 역시 nega-tive binomial model에 기반하고 있는 Bayesi
 * methodological 방법론적인
 * augmentation 논증
 * recapitulate 재현하다.
+* manifold 가지각색의, 여러 가지의 / 많은, 다수의
+* semantic 의미의
+* accordance 일치, 조화
+* verify 확인하다, 입증하다.
+* extract 추출하다 / 발췌 / 추출물
+* fluctuate 변동하다.
+* deviation 편차 / 일탈
+* neurite 신경돌기
+* deficiency 결핍 / 결함
+* axis (사물의)(중심) 축 / (도표의) 축 / (대칭체의) 중심축
+* fusiform gyrus 방추상회;  [후두엽](https://terms.naver.com/entry.nhn?docId=275053&ref=y)과 [측두엽](https://terms.naver.com/entry.nhn?docId=274585&ref=y)에 걸쳐있는 [내측](https://terms.naver.com/entry.nhn?docId=271692&ref=y) [후두](https://terms.naver.com/entry.nhn?docId=275052&ref=y) 측두회(medial occipitotemporal gyrus)의 다른 이름. 얼굴에 대한 [정보 처리](https://terms.naver.com/entry.nhn?docId=274119&ref=y)에 중요한 역할을 한다.
 
 <br>
 
