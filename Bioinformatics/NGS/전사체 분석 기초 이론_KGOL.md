@@ -228,7 +228,7 @@ alternative RNA splicing 을 통해 여러가지 단백질 생성
 
 
 
-![](C:\Users\Owner\Desktop\image\캡처.PNG)
+![Difference between bulk RNA-seq VS singel cell RNA-seq](C:\Users\Owner\Desktop\image\캡처.PNG)
 
 
 
