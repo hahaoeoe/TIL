@@ -226,7 +226,9 @@ alternative RNA splicing 을 통해 여러가지 단백질 생성
 
 **Difference between bulk RNA-seq VS singel cell RNA-seq**
 
-![](C:\Users\Owner\Pictures\Saved Pictures\캡처.PNG)
+
+
+![](C:\Users\Owner\Desktop\image\캡처.PNG)
 
 
 
@@ -483,7 +485,7 @@ alternative RNA splicing 을 통해 여러가지 단백질 생성
 4. Sequence
 5. FASTQ files => Single reads / Paired end reads
 
-![image-20200619131634013](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619131634013.png)
+![](C:\Users\Owner\Desktop\image\캡처2.PNG)
 
 <br>
 
@@ -561,7 +563,7 @@ Reference genome-free
 
 **전사체의 de novo assembly**
 
-![image-20200619135234678](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619135234678.png)
+![](C:\Users\Owner\Desktop\image\de noveo.PNG)
 
 <br>
 
@@ -569,7 +571,7 @@ Reference genome-free
 
 <RNA-seq 데이터 분석을 위한 모범 사례>
 
-![image-20200619135521595](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619135521595.png)
+![](C:\Users\Owner\Desktop\image\맵핑.PNG)
 
 <br>
 
@@ -628,7 +630,7 @@ RNA-seq의 일반적인 응용은 gene 또는 transcript 발현을 측정하는 
 
 **발현량 계산의 정규화**
 
-![image-20200619142405950](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619142405950.png)
+![](C:\Users\Owner\Desktop\image\발현량계산.PNG)
 
 
 
@@ -638,7 +640,7 @@ RPKM/FPKM 등을 사용
 
 **RPKM/FPKM**
 
-![image-20200619142652223](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619142652223.png)
+![](C:\Users\Owner\Desktop\image\R_FPKM.PNG)
 
 
 
@@ -663,7 +665,7 @@ RPKM/FPKM 등을 사용
 
 **발현량 분석을 위한 소프트웨어**
 
-![image-20200619143517731](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619143517731.png)
+![](C:\Users\Owner\Desktop\image\발현량 소프트웨어.PNG)
 
 <br>
 
@@ -708,7 +710,7 @@ RPKM/FPKM 등을 사용
 
 * Differential Expressed Genes (DEGs)는 다른 실험 조건 사이에서 유의하게 차등적으로 발현하는 유전자들을 의미함
 
-![image-20200619144839745](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619144839745.png)
+![](C:\Users\Owner\Desktop\image\DEGs.PNG)
 
 <br>
 
@@ -724,7 +726,7 @@ DEG 찾는데 의미 있는 값이다.
 
 **Fold change**
 
-![image-20200619145632570](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619145632570.png)
+![](C:\Users\Owner\Desktop\image\FC.PNG)
 
 * 두 조건의 값이 같으면 FC값이 1이 된다.
 
@@ -734,13 +736,13 @@ DEG 찾는데 의미 있는 값이다.
 
 **통계적으로 유의한 차등 발현 유전자의 검출**
 
-![image-20200619145924916](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619145924916.png)
+![](C:\Users\Owner\Desktop\image\통계발현.PNG)
 
 <br>
 
 **Hypothesis for DE testing**
 
-![image-20200619150347723](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200619150347723.png)
+![](C:\Users\Owner\Desktop\image\DEtesting.PNG)
 
 * 두 가지 가설을 채택하여 gA: A 조건에서 g 유전자 평균발현 (B는 B조건)
 * h0는 귀무가설 => 두 유전자의 발현이 같다
