@@ -334,6 +334,8 @@ alternative RNA splicing 을 통해 여러가지 단백질 생성
   * Ratio of normalized counts between 2 conditions
   * t-test to calculate P value / FPKM
 
+**Step 6 - Functional annotation**
+
 6. Functinoal annotation
 
 * 어떤 기능과 연관관계가 있어, 생물학적 의미를 가지고 있는지 확인
@@ -485,7 +487,7 @@ alternative RNA splicing 을 통해 여러가지 단백질 생성
 4. Sequence
 5. FASTQ files => Single reads / Paired end reads
 
-![](C:\Users\Owner\Desktop\image\캡처2.PNG)
+![NGS 시퀀싱](C:\Users\Owner\Desktop\image\캡처2.PNG)
 
 <br>
 
@@ -563,7 +565,7 @@ Reference genome-free
 
 **전사체의 de novo assembly**
 
-![](C:\Users\Owner\Desktop\image\de noveo.PNG)
+![de novo](C:\Users\Owner\Desktop\image\de noveo.PNG)
 
 <br>
 
@@ -571,7 +573,7 @@ Reference genome-free
 
 <RNA-seq 데이터 분석을 위한 모범 사례>
 
-![](C:\Users\Owner\Desktop\image\맵핑.PNG)
+![mapping](C:\Users\Owner\Desktop\image\맵핑.PNG)
 
 <br>
 
@@ -630,7 +632,7 @@ RNA-seq의 일반적인 응용은 gene 또는 transcript 발현을 측정하는 
 
 **발현량 계산의 정규화**
 
-![](C:\Users\Owner\Desktop\image\발현량계산.PNG)
+![normalization](C:\Users\Owner\Desktop\image\발현량계산.PNG)
 
 
 
@@ -640,7 +642,7 @@ RPKM/FPKM 등을 사용
 
 **RPKM/FPKM**
 
-![](C:\Users\Owner\Desktop\image\R_FPKM.PNG)
+![R/FPKM](C:\Users\Owner\Desktop\image\R_FPKM.PNG)
 
 
 
@@ -665,7 +667,7 @@ RPKM/FPKM 등을 사용
 
 **발현량 분석을 위한 소프트웨어**
 
-![](C:\Users\Owner\Desktop\image\발현량 소프트웨어.PNG)
+![software](C:\Users\Owner\Desktop\image\발현량 소프트웨어.PNG)
 
 <br>
 
@@ -710,7 +712,7 @@ RPKM/FPKM 등을 사용
 
 * Differential Expressed Genes (DEGs)는 다른 실험 조건 사이에서 유의하게 차등적으로 발현하는 유전자들을 의미함
 
-![](C:\Users\Owner\Desktop\image\DEGs.PNG)
+![DEGs](C:\Users\Owner\Desktop\image\DEGs.PNG)
 
 <br>
 
@@ -726,7 +728,7 @@ DEG 찾는데 의미 있는 값이다.
 
 **Fold change**
 
-![](C:\Users\Owner\Desktop\image\FC.PNG)
+![FC](C:\Users\Owner\Desktop\image\FC.PNG)
 
 * 두 조건의 값이 같으면 FC값이 1이 된다.
 
