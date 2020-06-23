@@ -28,7 +28,7 @@
 
 * [Expression Atlas](https://www.ebi.ac.uk/gxa/home) is an EMBL-EBI database and web-service that curates, re-analyses and displays [gene expression](https://www.ebi.ac.uk/training/online/glossary/gene-expression) data across species and biological conditions such as different tissues, cell types, developmental stages and diseases.
 
-* Single cell Expression Atlas was lauched in 2018 and contains 164 single cell RNA-Seq studies, consisting ot 4,646,599 cells, of which 3,342,629 passed our QC from 14 different species.
+* Single cell Expression Atlas was lauched in 2018 and contains 164 single cell RNA-Seq studies, consisting ot 4,646,599 cells, of which 3,342,629 passed our QC from 14 different species. (release 10 – May 2020)
 
 * Expression Atlas aims to help answer questions such as 'where is my favourite gene expressed?' or 'how does its expression change in a disease?'. To achieve this objective, the Expression Atlas project involves data curation, data analysis and provides a web application to access and visualise publicly available data (Figure 1).
 
@@ -37,6 +37,10 @@
   > **Figure 1** Expression Atlas includes data curation, analysis, search and visualisation of gene expression experiments.
 
 <br>
+
+### Introduction
+
+
 
 
 
@@ -96,7 +100,7 @@ DNA상의 특정한 서열에 유전자의 위치를 정하고, 이름을 붙이
 * Mass spectrometer로 분석하기 위해, trypsin 또는 lys-C 등과 같이 단백질를 펩다이드로 분해하는 효소를 사용하여 , 단백질를 펩타이드의 형태로 만들어준다. 
 * 가장 일반적으로 사용되어지고 있는 Mass spectrometric 분석법의 한종류인 Matrix-assisted laser desorption/ionization (MALDI) 는 이온화 되어진 펩타이드 분자를 이용하여 분석하는 방법이며, 각각의 이온화된 펩타이드들이 그 크기별로 각각의 peak들로 spectrum상에 나타나게 된다 (그림1). 이미 알고 있는 단백질 post translation modification의 확인하기 위해 주로 사용되어진다.
 
-![image-20200616114834264](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\image-20200616114834264.png)
+![image-20200616114834264](https://github.com/hahaoeoe/TIL/blob/master/Bioinformatics/Article/Image/Expression%20Atlas/Mass%20spectrometry.PNG?raw=true)
 
 <br>
 
@@ -105,6 +109,10 @@ DNA상의 특정한 서열에 유전자의 위치를 정하고, 이름을 붙이
 Droplet-based microfluidics enables assays to be carried out at very high throughput (up to thousands of samples per second) and enables researchers to work with very limited material, such as primary cells, patient's biopsies or expensive reagents. An additional strength of the technology is the possibility to perform large-scale genotypic or phenotypic screens at the single-cell level. Here we critically review the latest developments in antibody screening, drug discovery and highly multiplexed genomic applications such as targeted genetic workflows, single-cell RNAseq and single-cell ChIPseq. Starting with a comprehensive introduction for non-experts, we pinpoint current limitations, analyze how they might be overcome and give an outlook on exciting future applications.
 
 <br>
+
+## Cell-demultiplex
+
+
 
 ## 단어
 
@@ -137,27 +145,59 @@ Droplet-based microfluidics enables assays to be carried out at very high throug
 
 ## 출처
 
-<t-SNE>
+**t-SNE**
 
 https://lovit.github.io/nlp/representation/2018/09/28/tsne/
 
-<RNA sequencing>
+**RNA sequencing**
 
 * https://m.blog.naver.com/PostView.nhn?blogId=naturelove87&logNo=221471424098&proxyReferer=http:%2F%2Fwww.google.com%2Furl%3Fsa%3Dt%26rct%3Dj%26q%3D%26esrc%3Ds%26source%3Dweb%26cd%3D%26cad%3Drja%26uact%3D8%26ved%3D2ahUKEwj4tsmlk4XqAhVOM94KHUmTDswQFjADegQIAxAB%26url%3Dhttp%253A%252F%252Fm.blog.naver.com%252Fnaturelove87%252F221471424098%26usg%3DAOvVaw2CSQvJUmG2tHXOIBTHvGYh
 
 * https://www.ibric.org/myboard/read.php?id=3050&Board=report
 
-<Ontology>
+**Ontology**
 
 * http://www.incodom.kr/%EC%9C%A0%EC%A0%84%EC%9E%90_%EA%B8%B0%EB%8A%A5_%EB%B6%84%EC%84%9D/%EC%98%A8%ED%86%A8%EB%A1%9C%EC%A7%80
 
 *  https://ar6com.tistory.com/50 
 
-<Mass spectrometry>
+**Mass spectrometry**
 
 Mass Spectrometry 를 이용한 단백질 서열 분석 및 식별 / 김영천, 아열대원예산업연구소, 제주대학교
 
-<Droplet technology>
+**Droplet technology**
 
 https://pubs.rsc.org/en/content/articlelanding/2016/lc/c6lc00249h#!divAbstract
+
+<br>
+
+**Expression Atlas**
+
+https://www.ebi.ac.uk/training/online/course/expression-atlas-quick-tour/what-expression-atlas-1
+
+<br>
+
+**Nextflow**
+
+https://cloud.google.com/life-sciences/docs/tutorials/nextflow?hl=ko
+
+<br>
+
+**유전자발현 공공데이터베이스**
+
+http://www.incodom.kr/%EC%9C%A0%EC%A0%84%EC%9E%90_%EB%B0%9C%ED%98%84_%EA%B4%80%EB%A0%A8_Public_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4_%EB%B0%8F_%EB%B6%84%EC%84%9D_%EB%8F%84%EA%B5%AC
+
+https://bioinformaticsandme.tistory.com/3
+
+
+
+<br>
+
+
+
+
+
+
+
+
 
