@@ -32,7 +32,7 @@
 
 * Expression Atlas aims to help answer questions such as 'where is my favourite gene expressed?' or 'how does its expression change in a disease?'. To achieve this objective, the Expression Atlas project involves data curation, data analysis and provides a web application to access and visualise publicly available data (Figure 1).
 
-  ![Figure.1](./Image/Expression Atlas/Expression Atlas.png)
+  ![Figure.1](.\Image\Expression Atlas\Expression Atlas.png)
 
   > **Figure 1** Expression Atlas includes data curation, analysis, search and visualisation of gene expression experiments.
 
