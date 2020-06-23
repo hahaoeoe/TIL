@@ -20,6 +20,26 @@
 
 <br>
 
+### Abstract
+
+* European Bioinformatics Institute (**EMBL-EBI**)
+
+* [Expression Atlas](https://www.ebi.ac.uk/gxa/home) is EMBL-EBI's resource
+
+* [Expression Atlas](https://www.ebi.ac.uk/gxa/home) is an EMBL-EBI database and web-service that curates, re-analyses and displays [gene expression](https://www.ebi.ac.uk/training/online/glossary/gene-expression) data across species and biological conditions such as different tissues, cell types, developmental stages and diseases.
+
+* Single cell Expression Atlas was lauched in 2018 and contains 164 single cell RNA-Seq studies, consisting ot 4,646,599 cells, of which 3,342,629 passed our QC from 14 different species.
+
+* Expression Atlas aims to help answer questions such as 'where is my favourite gene expressed?' or 'how does its expression change in a disease?'. To achieve this objective, the Expression Atlas project involves data curation, data analysis and provides a web application to access and visualise publicly available data (Figure 1).
+
+  ![Figure.1](./Image/Expression Atlas/Expression Atlas.png)
+
+  > **Figure 1** Expression Atlas includes data curation, analysis, search and visualisation of gene expression experiments.
+
+<br>
+
+
+
 ## t-SNE
 
 > t-Stochastic Nearest Neighbor ; "티스니"라 읽음 
