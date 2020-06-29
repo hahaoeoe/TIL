@@ -182,4 +182,46 @@
 
 58. more apple/apple.samples
 
-59. 
+59. comm apple/apple.samples pear/pear.samples
+
+    > - 2개의 파일을 비교하는 리눅스 명령어
+    > - (diff 와는 달리) 동일 행끼리만 단순 비교
+    >
+    > <br>
+    >
+    > - 첫번째 파일에만 있으면 첫번째 칸(탭 없음)
+    > - 두번째 파일에만 있으면 두번째 칸(탭 1개)
+    > - 둘 다 있으면 세번째 칸(탭 2개)
+
+60. sort apple/apple.samples > apple/apple.samples.sorted
+
+61. sort pear/pear.samples > pear/pear.samples.sorted
+
+62. comm apple/apple.samples.sorted pear/pear.samples.sorted
+
+63. comm  -1 -2 apple/apple.samples.sorted pear/pear.samples.sorted
+
+    > 이렇게 하면 62번 결과에서 둘 다 있는 세번째 칸만 결과로 나오게 된다.
+
+64. gzip apple.genome
+
+65. ls -l apple.*
+
+66. gunzip apple.genome.gz 
+
+67. ls 
+
+68. ls -l
+
+69. bizp2 apple.genome
+
+70. ls -l apple.genome.bz2
+
+71. bunzip2 apple.genome.bz2
+
+72. ls -l 
+
+73. tar -cvf Apple.tar apple.genes apple.genome apple.samples
+
+    
+
