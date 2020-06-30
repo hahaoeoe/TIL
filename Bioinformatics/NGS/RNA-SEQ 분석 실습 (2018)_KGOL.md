@@ -117,7 +117,7 @@ Detecting new transcripts
 
 Very low background signal
 
-: accurate for quantifying wxpression levels
+: accurate for quantifying expression levels
 
 <br>
 
@@ -332,7 +332,7 @@ $ In -s [file path]  => make a symbolic link
 
 : 먼저 QC를 실행해야한다. Outlier 알 수 있고 다음으로 넘어갈 수 있다.
 
-: fragment 상태에 있는 read를 실제 genome data에 mapping 하여 alling을 해야한다. 이때, Tophat을 이용하여 aling 하여 mapping
+: fragment 상태에 있는 read를 실제 genome data에 mapping 하여 allign을 해야한다. 이때, Tophat을 이용하여 aling 하여 mapping
 
 : cufflinks/cuffmerge를 이용하여 mapping이 끝난 read를 assemble하고 하나의 transcriptome으로 merge 하게 됨
 
