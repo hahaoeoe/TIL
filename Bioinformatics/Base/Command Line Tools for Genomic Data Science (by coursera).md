@@ -223,5 +223,41 @@
 
 73. tar -cvf Apple.tar apple.genes apple.genome apple.samples
 
+    > cvf 알아보기
     
+74. gzip Apple.tar
+
+75. tar -xvf Apple.tar
+
+76. 
+
+77. rm * 
+
+    > everything remove in the local directory
+
+78. tar -cvf AppleD.tar apple/
+
+79. bzip2 AppleD.tar
+
+80. mv AppleD.tar.bz2 sandbox
+
+81. bunzip2 AppleD.tar.bv2
+
+82. tar -xvf AppleD.tar
+
+<br>
+
+**Practical Expercises I**
+
+
+
+## Week2. Sequences and Genomic Features
+
+ 
+
+
+
+
+
+
 
