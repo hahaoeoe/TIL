@@ -253,11 +253,217 @@
 
 ## Week2. Sequences and Genomic Features
 
- 
+#### Molecular Bio Primer
+
+ Exon - Intron
+
+<Br>
+
+####  Sequence Representation and Generation
+
+**Generation**
+
+* Sanger sequencing (until 2008)
+  - Shear DNA/RNA into fragments
+  - Clone in vector (amplification)
+  - Sequence insert end(s): 500-800bp
+  - Slow, costly, medium-to-high throughput
+* Next Generation Sequencing(NGS) (>2008)
+  - Shear DNA/RNA (cDNA)
+  - May or may not require amplification
+  - Sequence fragment ends: 50-450 bp, single-end or paired-end reads
+  - Low cost (<$0.04/Mb), fast, very high throughput (100s millions / run)
+
+*=> Assemlby can be very challenging, especially with the shorter sequences!*
+
+<br>
+
+**Fast/Fastaq**
+
+<br>
+
+#### Annotation
+
+> 이해 잘 못함
+
+**Genomic features**
+
+* Genome annotation = determine the precise location and structure (intervals, or lists of intervals, and associated biological information) of genomic features along the genome
+* Genomic features: genes, promoters, protein binding sites, translation start /stop site, DNasel sites, etc.
+* Example - gene annotations:
+  * Exon/intron structure (exon and intron start-end coordinates)
+  * Strand ( + or - )
+  * Start and end sites for translation (ORF)
 
 
 
+**BED format**
 
+: Browser Extensible Data
 
+<br>
 
+**GTF format**
+
+: Genomic Transfer Format
+
+<br>
+
+**GFF3 format**
+
+**GDF format**
+
+<br>
+
+#### Alignment I
+
+**Alignments**
+
+* Sequence a fragment of  the gene (RNA) or genomic region (DNA), then map (align) it to the genome
+* *Alignment*: a mapping between the letters of the two sequences, with some spacers (indels)
+* The alignment will take into account differences such as polymotphisms and sequencing errors, and introns (for genes)
+* Insertion / Deletion / Substitutions
+
+<br>
+
+**Representation: SAM/BAM format**
+
+<br>
+
+#### Alignment II
+
+**SAM format: FLAG**
+
+**SAM format: CIGAR**
+
+* M match (sequence match or substitution)
+
+* I insertion to the reference 
+* D deletion from the reference 
+* N skipped region (intron) 
+* S soft clipping (sequence start or end not aligned; seq appears in SEQ) 
+* H hard clipping (seq not in SEQ) 
+* P padding first segment (mate) 
+* = sequence match 
+* X sequence mismatch 
+
+<br>
+
+#### Recreating Sequences & Features
+
+> GenBank:	Nucleo6de, SRA, GEO	
+>
+> UCSC Table Browser	
+>
+> Ensembl
+
+NCBI에서 원하는 gene을 검색하고 FASTQ 파일이나, SRA 파일을 다운받아서 weget ftp://ftp-trace~~ 를 prompt에서 실행하면 원하는 gene을 다운 가능
+
+<br>
+
+```c
+$ nohup fastq-dump STT1107997.sra &
+$ head SSRR1107997.fastq
+
+```
+
+<br>
+
+#### Genomic Feature Retrieval
+
+: UCSC Table Browser
+
+<br>
+
+#### SAMtools I
+
+$ samtools1 flagstat example.bam
+
+$ samtools1 sort
+
+> option 볼 수 있음
+
+$ samtools1 sort example.bam
+
+$ nohup samtools1 sort example.bam examole.sorted &
+
+$ ls  NA12814
+
+$ samtools1 index
+
+$ index example.sorted.bam
+
+$ ls -lt
+
+$ ls NA12814_1.fastq.gz NA12814_2.fastq.gz
+
+$ zcat NA12814_1.fastq.gz | wc -l
+
+$ samtools1 merge
+
+$ nohup samtools1 merge NA12814.bam NA12814_1.bam NA12814_2.bam &
+
+$ samtools1 flagstat NA12814_1.bam
+
+<br>
+
+=> SAMtools flags, sort, index에 대해 배움
+
+<br>
+
+#### SAMtools II
+
+$ samtools1 view example.bam | more
+
+$ view -h example.bam | more
+
+$ samtools1 view -h exmple.bam > example.sam
+
+$ samtools view -H example.bam
+
+<br>
+
+*How to convert SAM to BAM*
+
+$ samtools1 view -bT /data1/igm3/genomes/hg38/hg38c.fa example.sam > example.sam.bam
+
+$ samtools1 view example.sam.bam
+
+$ samtools1 view
+
+$ samtools1 view -H example.bam "chr22:2400000-2500000"
+
+$ samtools1 index example.bam
+
+$ ls -l example.bam.bam
+
+$ samtools1 view example.bam "chrr22:2400000-2500000" | head
+
+$ samtools1 view -L example.bed example.bam | head
+
+$ samtools1 view -L example.bed example.bam | tail
+
+<br>
+
+#### BEDtools I
+
+$ bedtools >& bedtools.log
+
+$ bedtools intersect >& intersect.log
+
+$ vi intersect.log
+
+ $ bedtools intersect -wo -a RefSeq.grf -b Alus.bed | more
+
+$ bedtools intersect -wo -a RefSeq.gtf -b Alus.bed | cut -f9 | cut -d ' ' -f2 |more
+
+$ bedtools intersect -wo -a RefSeq.gtf -b Alus.bed | cut -f9 | cut -d ' ' -f2 |sort -u wc -l
+
+<br>
+
+#### BEDtools II
+
+<br>
+
+## Week3. Alignment & Sequence Variation
 
