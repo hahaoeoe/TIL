@@ -23,3 +23,5 @@
 10. Venv 가상환경 나와서 base 환경에서  tensorflow-gpu 다운
 
 11. error 남,,,
+
+12. 
