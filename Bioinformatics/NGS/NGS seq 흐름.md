@@ -29,10 +29,32 @@
    : R을 통해 진행
 
    : DEseq2
-   
+
    : DEseq2를 통해 Normalization 진행
-   
-   
-   
-   
+
+<br>
+
+___
+
+#### 흐름 중 필요한 공부
+
+1. Alignment -> Reference (.fa file) ▶Read count (Hiseq-count)
+
+2. Normalization (DEseq2)  ▷ Youtube 시청하기
+
+   > RPKM, FPKM, TPM
+
+3. DEG 선별 
+
+   > DESeq 패키지
+   >
+   > Log fold change ★
+
+4. Pathway 분석
+
+5. VCF
+
+   > BAM file, SAM file
+
+6. Single-end / paired end 공부필요
 
