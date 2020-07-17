@@ -128,6 +128,10 @@ sample들 안에서 맵핑되는 reads의 비율을 보다 명확하게 말해�
 
 
 
+![Comparison of normalization methods for real data. (A) Boxplots of log2(counts + 1) for all conditions and replicates in the M. musculus data, by normalization method. (B) Boxplots of intra-group variance for one of the conditions (labeled ‘B’ in the corresponding data found in Supplementary Data) in the M. musculus data, by normalization method. (C) Analysis of housekeeping genes for the H. sapiens data. (D) Consensus dendrogram of differential analysis results, using the DESeq Bioconductor package, for all normalization methods across the four datasets under consideration.](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/bib/14/6/10.1093/bib/bbs046/2/bbs046f1p.png?Expires=1597989775&Signature=BkMT093POpyOJERL46ZKz5o6aQGxSZLJNhD~l7mSLRztIic43H58lC-G2yBsJK-GRio1Ar0QSeAGaqjr7FBhjd3l1giH50PTvrIr6ieir~hJ-cDzKP5xLcHuSVpWI7~Y57saqLfWb-9KxQv3mvy8JDqfbI2n2hDX3jP~DlN9Zqkxu1V6FZTiWcDG-dxGp3a-USaiyYybj78xGbF9LBbN8PMjzlu~mbxzQLj7FvEM4u9apGyiSmLq46YpYGwT8DZv1qYsGhAOI-MiRabh23Yue0vsT84a6l~wNamfm925~cjhFzWkO7XlA4nYC-BJMO7~R54Vokg0YP2seeaydzcG6Q__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA)
+
+
+
 
 
 <br>
@@ -136,8 +140,17 @@ sample들 안에서 맵핑되는 reads의 비율을 보다 명확하게 말해�
 
 > RNA-Seq은 이미 알려진 스플라이싱 결합부위에 매핑되는 단편서열을 정략적으로 셀 수 있을 뿐만 아니라, 미지의 새로운 스플라이싱 결합부위 탐색도 가능하다. 엑손결합부의(Exone junction)에 매핑된 단편서열의 검출로 스플라이싱 위치를 찾아 낼 수 있고, 드노버 서열조립을 통해 엑손 건너뛰기 같은 선택적 스플라이싱도 찾아 낼 수 있다.
 
-\- RNA이어맞추기(스플라이싱; splicing)는 전사*를 통해 만들어진 미성숙 전령 DNA(pre-mRNA)에서 불필요한 부분인 인트론(intron)이 잘려나가고, 필요한 부분인 엑손(exon)끼리 서로 연결되는 과정을 의미한다.
+\- RNA이어맞추기(스플라이싱; splicing)는 전사*를 통해 만들어진 미성숙 전령 DNA(pre-mRNA)에서 불필요한 부분인 인트론(intron)이 잘려나가고, 필요한 부분인 엑손(exon)끼리 서로 연결되는 과정을 의미한다. 
+
    \* 전사: DNA에 있는 정보를 RNA로 전환하는 과정. DNA를 틀로 삼아 이와 상보적인 RNA를  생성한다.
+
+<br>
+
+ 한 개의 유전자에서 생성되는 mRNA는 여러 종류가 될 수 있으며 이 것은 차등적 스플라이싱(alternative splicing)이라는 기전에 의해 다른 조합의 엑손으로 이루어진 mRNA가 만들어 지는 것이다. 이것을 isoform이라 부르기도 하며 각 isoform 별 유전자 발현 차이를 NGS로 분석 하는 것이 가능하다. 또한 DNA 변화에 의해 스플라이싱에 문제를 일으켜 비정상적 스플라이싱(aberrant splicing)이 일어나면 온전한 mRNA가 만들어지 못하여 단백질 합성에 문제를 일으킬 수 있다. RNA 시퀀 싱으로 이러한 비정상적 스플라이싱 여부를 쉽게 확인할 수 있다.
+
+스플라이싱 사이트에 발생한 변이는 RNA 스플라이싱을 방해하여 엑손의 손실이나 단백질 코딩 서열의 변경을 초래할 수 있다.
+
+<br>
 
 \- 선택적 RNA 이어맞추기(alternative RNA splicing)는 엑손들이 연결될 때 순서를 건너뛰면서 결합되어 다양한 조합의 단백질을 만들어내는 과정이다. 이를 통해 하나의 유전자에서 기능이 서로 다르거나 심지어는 상반되는 여러 개의 단백질이 만들어진다. 유전병, 노인성 질환 혹은 암이 발생하게 되면 이 이어맞추기 과정이 비정상적으로 변하는 것으로 알려졌으나, 어떠한 요인에 의한 것인지는 분명하지 않았다.
 
@@ -145,7 +158,7 @@ sample들 안에서 맵핑되는 reads의 비율을 보다 명확하게 말해�
 
 
 
-
+<br>
 
 
 
@@ -173,7 +186,9 @@ https://williamjeong2.github.io/bioinformatics/7-gene-expression-unit-explained/
 
 
 
+\- Splicing
 
+출처: 'NGS(Next Generation Sequencing) 기반 유전자 검사의 이해 (심화용)' [식품의약품안전처 식품의약품안전평가원]
 
 
 
