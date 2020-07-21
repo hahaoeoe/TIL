@@ -66,6 +66,8 @@ ____
 
 **FastQC**: 차세대 염기서열 데이터의 Quality Control을 진행한다. 이 때 데이터의 read length를 파악하여 추후 trimmimg 단계에서의 기준을 제공한다.
 
+
+
 <br>
 
 ## Trimmomatic
@@ -216,11 +218,9 @@ Let’s have a look on all the arguments of this command:
 
 ### Trimommatic attributes
 
-\- PE
-
-\- -threads 12
-
-\- -phred33
+* PE
+* -threads 12
+* -phred33
 
 <br>
 
