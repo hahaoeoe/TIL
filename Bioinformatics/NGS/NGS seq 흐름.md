@@ -445,14 +445,82 @@ hisat2 [options]* -x <hisat2-idx> {-1 <m1> -2 <m2> | -U <r> | --sra-acc <SRA acc
 
 ### SAMTOOLS
 
-?? 왜 samtools은 export path 지정 안해줘도 가능한가?
+```c
+echo "samtools sort -@ 40 -o $i_bam $i_sam"
+echo "samtools sort -@ 40 -o $i_bam $i_sam" >> $log_file
+samtools sort -@ 40 -o $i_bam $i_sam
+echo " "
+echo " " >> $log_file
+```
+
+[SAM](http://www.incodom.kr/SAM) 포맷의 파일을 가지고 여러 가지 기능을 수행할 수 있는 커맨드 기반의 프로그램이다. [SAMtools](http://www.incodom.kr/SAMtools)로 분석을 하기 위해서는 SAM의 binary 형태인 [BAM](http://www.incodom.kr/BAM)으로 변환해야 한다. [SAMtools](http://www.incodom.kr/SAMtools)는 SAM 파일 안에서 얼라인먼트를 다루기 위한 다양한 프로그램을 제공한다. (ex. sort, view, index, stats 등).
+
+| sort                                                         |
+| ------------------------------------------------------------ |
+| samtools sort [**-l** *level*] [**-m** *maxMem*] [**-o** *out.bam*] [**-O** *format*] [**-n**] [**-t** *tag*] [**-T** *tmpprefix*] [**-@** *threads*] [*in.sam* |
+
+Sort alignments by leftmost coordinates, or by read name when **-n** is used. An appropriate **@HD-SO** sort order header tag will be added or an existing one updated if necessary.
+
+The sorted output is written to standard output by default, or to the specified file (*out.bam*) when **-o** is used. This command will also create temporary files *tmpprefix***.***%d***.bam** as needed when the entire alignment data cannot fit into memory (as controlled via the **-m** option).
+
+Consider using **samtools collate** instead if you need name collated data without a full lexicographical sort.
+
+
+
+??? bam 파일이 없는데 bam이 자동 생성되서 sort되나요? 코드에서 sam > bam 변환하는 코드 없는 것 같습니다. 또한 samtools view와 sort 차이가 뭔지 view는 변환이고 sort 는 정렬로 알고 있는데 저희 코드에서 sort만 사용했는데 변환이 되나요?
+
+??? alignment 코드에서 index_path 저와 차이가 있는 이유
+
+
+
+#### SAM Workflow
+
+- [SAM](http://www.incodom.kr/SAM) 파일을 binary 형태인 [BAM](http://www.incodom.kr/BAM) 파일로 전환
+
+  - **samtools view**를 이용해서 변환한다.
+
+    ```
+    samtools view -Sb -h -@ [threads] [SAM] -o [BAM]
+    
+    -S : input file 포맷 자동으로 확인함.
+    -b : output file 포맷 BAM
+    -h : SAM file header 출력 (사용하지 않으면, 매핑 결과부터 전환)
+    -@ : 사용할 multi-core 수
+    -o : samtools view의 결과 파일 (사용하지 않으면, STDOUT)
+    ```
+
+- Data processing을 간소화하기 위한 sorting
+
+  - 시퀀싱 리드 매핑 결과를 참조 유전체 서열의 포지션 별로 정렬하는 프로그램이다.
+
+  - **samtools sort**를 이용해서 변환한다.
+
+    ```
+    samtools sort -@ [threads] -o [sorted.bam] [BAM]
+    
+    -o : samtools sort의 결과 파일 (사용하지 않으면, STDOUT)
+    -@ : 사용할 multi-core 수
+    ```
+
+- sorted.bam file 내의 매핑 결과를 빠르게 접근하기 위한 index
+
+  ```
+  samtool index -b -@ [threads] [sorted.bam] [out.index]
+  
+  -b : BAM file의 index (.bai 파일 생성)
+  -@ : 사용할 multi-core 수
+  ```
 
 
 
 ## 출처
 
-[Incodom] http://www.incodom.kr/Trimmomatic
+[Trimmomatic] http://www.incodom.kr/Trimmomatic
 
 [Trimmomatic search] https://slequime.github.io/HTS-tutorial/trimming-trimmomatic.html
 
 [HISAT2] https://ccb.jhu.edu/software/hisat2/manual.shtml
+
+[samtools] http://www.incodom.kr/SAMtools
+
+[samtools] https://man.cx/samtools
