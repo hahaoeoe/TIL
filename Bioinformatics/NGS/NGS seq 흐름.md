@@ -70,37 +70,91 @@ ____
 
    ![Quality control: Assessing FASTQC results | Introduction to RNA ...](https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon/img/fastqc_basic_stats.png)
 
+   * Filename: The original filename of the file which was analysed 
+   * File type: Says whether the file appeared to contain actual base calls or colorspace data which had to be converted to base calls 
+   * Encoding: Says which ASCII encoding of quality values was found in this file.
+   * Total Sequences: A count of the total number of sequences processed. There are two values reported, actual and estimated. At the moment these will always be the same. In the future it may be possible to analyse just a subset of sequences and estimate the total number, to speed up the analysis, but since we have found that problematic sequences are not evenly distributed through a file we have disabled this for now. 
+   * Filtered Sequences: If running in Casava mode sequences flagged to be filtered will be removed from all analyses. The number of such sequences removed will be reported here. The total sequences count above will not include these filtered sequences and will the number of sequences actually used for the rest of the analysis. 
+   * Sequence Length: Provides the length of the shortest and longest sequence in the set. If all sequences are the same length only one value is reported. 
+   * %GC: The overall %GC of all bases in all sequences
+
+   <br>
+
 2. Per base sequence quality
 
    ![Quality scores per base summarized over all reads plotted by ...](https://www.researchgate.net/profile/Yonggang_Zhou4/publication/277727592/figure/fig4/AS:269528346173442@1441271973326/Quality-scores-per-base-summarized-over-all-reads-plotted-by-FastQC-Reads-were-trimmed.png)
+
+   * The central red line is the median value 
+
+   * The yellow box represents the inter-quartile range (25-75%) 
+
+   * The upper and lower whiskers represent the 10% and 90% points 
+
+   * The blue line represents the mean quality
+
+   * The y-axis on the graph shows the quality scores. The higher the score the better the base call. The background of the graph divides the y axis into very good quality calls (green), calls of reasonable quality (orange), and calls of poor quality (red).
+
+     <br>
 
 3. Per sequence quality scores
 
    <img src="https://www.openbioinformatics.org/seqmule/example/trio_report/father/father.2_phred33_fastqc/Images/per_sequence_quality.png" alt="father.2_phred33.fastq FastQC Report" style="zoom: 67%;" />
 
+   The per sequence quality score report allows you to see if a subset of your sequences have universally low quality values
+
+   <br>
+
 4. Per base sequence content
 
    <img src="https://i.imgur.com/hxUW2Cn.png" alt="High A in &quot;Per base sequence content&quot; of fastQC report" style="zoom: 67%;" />
 
+   * Per Base Sequence Content plots out the proportion of each base position in a file for which each of the four normal DNA bases has been called.
+
+   * 랜덤 라이브러리에서는 시퀀스 실행의 서로 다른 기준간에 거의 또는 전혀 차이가 없을 것으로 예상되므로 이 플롯의 선은 서로 평행하게 실행되어야 한다. 각 염기의 상대적인 양은 게놈에서 이러한 염기의 전체적인 양을 반영해야하지만, 어떤 경우에도 서로 크게 불균형해서는 안된다.
+
+   * 다른 염기에서 변화하는 강한 치우침이 나타나는 경우, 이는 일반적으로 라이브러리를 오염시키는 과다 표현 된 시퀀스를 나타낸다. 모든 염기에 걸쳐 일관된 편향은 원래 라이브러리가 서열 편향되었거나 라이브러리 시퀀싱 중에 체계적인 문제가 있음을 나타냅니다.
+
+     <br>
+
 5. Per sequence GC content
 
-   ![Per Sequence GC Content](https://lh3.googleusercontent.com/proxy/o1BeyxXoHxlBgILP2EzXcVo-CzxFEF1y0uiDc97xJ-EDUWaTBhqptaznZ-b2i1N-KvX1fpuxz-lLVhmucnkF8fSRmHS7bcRSUkhIbECH_zyRAZLBMuzkrtsGAWxsOnKK4t7QuDBafR_Jj56lMa3wCUB2)
+   <img src="https://i.ibb.co/WsDF3JP/per-sequence-gc-content.png" alt="How to interpret Per sequence GC content module in FastQC for RNA ..." style="zoom:50%;" />
+
+   * This module measures the GC content across the whole length of each sequence in a file and compares it to a modelled normal distribution of GC content.
+
+     <br>
 
 6. Per base N content
 
-   <img src="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/per_base_n_content.png" alt="Per Base N Content" style="zoom:67%;" />
+   <img src="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/per_base_n_content.png" alt="Per Base N Content" style="zoom: 50%;" />
+
+   * If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base] call This module plots out the percentage of base calls at each position for which an N was called.
+
+     <br>
 
 7. Sequence Length Distribution
 
    <img src="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/sequence_length_distribution.png" alt="Sequence Length Distribution" style="zoom:67%;" />
 
+   * This module generates a graph showing the distribution of fragment sizes in the file which was analysed.
+
+   * In many cases this will produce a simple graph showing a peak only at one size, but for variable length FastQ files this will show the relative amounts of each different size of sequence fragment.
+
+     <br>
+
 8. Sequence Duplication Levels
 
    <img src="https://image.ibb.co/g1Eu9U/image.png" alt="Illumina HiSeq generates abnormally high duplication levels and ..." style="zoom:67%;" />
 
+   * This module counts the degree of duplication for every sequence in the set and creates a plot showing the relative number of sequences with different degrees of duplication
+
+     <br>
+
 9. Overrepresented sequences
 
    <img src="https://i.imgur.com/AYv7nyq.png" alt="3' Tag-Seq / DE Analysis - FASTQC detects overrepresented ..." style="zoom: 25%;" />
+
+   
 
 10. Adapter Content
 
@@ -514,6 +568,8 @@ Consider using **samtools collate** instead if you need name collated data witho
 
 
 ## 출처
+
+[FASTQC] FASTQC manual 참고
 
 [Trimmomatic] http://www.incodom.kr/Trimmomatic
 
