@@ -1388,3 +1388,81 @@ $ screen -r test 		\# test 이름의 세션 재진입
 
 ### 주요 리눅스 로그들
 
+![데이터 기술 동향 < 정보마당 - 한국데이터산업진흥원](https://lh3.googleusercontent.com/proxy/u1laiBzQj29E7m-vXekYUSRCv53VxNjZzEhvGE2K1KvuW4kSnb2gfEnoPK51-PO960PI9F3sBvaLnZdyH2dDiyeeeISivgl5sy6DXKa4HdBbMQV-OAmI)
+
+![img](https://1.bp.blogspot.com/-fYapmfNR3aE/WIGd55O2-kI/AAAAAAAAAEc/yUZIkA9XlTotflrZ42FoY5Mnw9FO6wvhwCLcB/s640/%25EA%25B7%25B8%25EB%25A6%25BC2.png)
+
+<br>
+
+### 로그 파일 관리
+
+리눅스에서 로그 파일은 /var/log 디렉토리에서 자동으로 관리된다.
+
+<br>
+
+### 로그 파일 보기
+
+로그파일은 텍스트파일이며, head, tail, cat, grep 등을 활용할 수있다. 
+
+<실습>
+
+putty 실행 후 su - 로 관리자로 실행하여야만 로그파일은 확인할 수 있다.
+
+cd var/log 로 들어간다.
+
+<br>
+
+### Cron으로 반복작업 자동화
+
+### cron
+
+**작업 스케줄러 프로그램 cron**
+
+cron은 리눅스/유닉스에서 특정 시간에 어떠한 명령을 동작시키는 스케줄러 역할을 수행한다. cron을 이용하여 특정 시간 이외에도 년, 월, 일, 시, 분, 초 단위로 작업을 반복해야 할 작업에 활용할 수도 있다. 구체적인 cron의 활용 예는 아래와 같다.
+
+* 서버에 동작중인 프로그램의 주기적인 데이터 백업, 로그 백업 등 반복 작업을 실행 해야하는 경우
+* 또한 주기적인 작업이 아니더라도 새벽시간이나, 접속이 어려운 시간대에 작업을 해야 할 경우
+
+Cron은 데몬 프로그램으로 부팅과 동시에 시작되며, 대부분의 리눅스에 탑재되어 있다.
+
+현재 동작중인 프로세스는 아래 명령어로 확인할 수 있다.
+
+$ ps -ef | grep cron
+
+<br>
+
+**데몬 프로그램**
+
+특정한 서비스를 위해 백그라운드에서 계속 실행되는 프로세스. 일반적인 프로그램은 쉘이 종료될때 같이 종료되나, 강제 종료시키지 않는 이상 시스템이 종료될 때까지 상주해 있다.
+
+특징 
+
+* 대부분 시스템 부팅과 동시에 데몬 프로그램이 활서오하된다.
+* 시스템이 종료되기 전까지 데몬은 계속 동작하며 백그라운드에서 특정한 서비스를 제공하는 프로세스를 말한다.
+
+<br>
+
+### cron을 이용한 스케줄링
+
+cron의 스케쥴 관리는 crontab이라는 명령어를 통해 제어할 수 있다. crontab의 기본적인 명령어 구조는 아래와 같으며 각 옵션에 대한 상세한 설명은 man crontab 명령어를 이용하여 확인할 수 있다.
+
+<br>
+
+### crontab 사용방법
+
+$ crontab -l 현재 등록된 스케줄링 목록 조회
+
+$ contab -e cron에 실행할 명령어 등록 (vim 이 실행된다.)
+
+ 	\# 현재는 목록이 없으므로 표시 안됨.
+
+<br>
+
+명령어 규칙
+
+10 11 27 10 "test_log" > /heom/duscak/log.txt 생성
+
+\- 10월 27일 10시 11분에 "test_log" 라는 글자를 /home/duscan.log 파일에 작성
+
+<br>
+
