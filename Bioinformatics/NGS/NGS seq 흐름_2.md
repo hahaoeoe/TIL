@@ -51,6 +51,38 @@ htseq-count -s reverse -f bam $input_path$i_bam $index_path/Mus_musculus.GRC,38.
 
 <br>
 
+## DEseq2
+
+**Description**
+
+DESeq2는 DEG분석의 대표적인 방법 중의 하나로, 차세대 염기서열분석(Next Generation Sequencing)으로부터 얻는 read count data를 분석하는 R 패키지이다.
+
+The DESeq2 package is designed for normalization, visualization, and differential analysis of highdimensional count data. It makes use of empirical Bayes techniques to estimate priors for log fold change and dispersion, and to calculate posterior estimates for these quantities.
+
+<br>
+
+**Code 이해**
+
+```R
+meta <- rownames_to_column(meta, "sample")
+```
+
+ 행을 사용하기 위해서 행 이름을 sample 변수로 바꿔준다. 이때,  tibble 패키지에 있는 rownames_to_column() 을 사용한다.  바꿔줄 데이터, 그리고 생길 행의 변수명을 입력한다.
+
+```R
+all(meta$sample == colnames(JKreadcount))
+```
+
+True / False로 반환해줌
+
+```R
+desing = data.frame(row.names = colnames(JKreadcount), condition = meta$phenotype)
+condition = meta$phenotype
+dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condition)
+```
+
+Create a coldata frame and instantiate the DESeqDataSet. See ?DESeqDataSetFromMatrix
+
 
 
 ## 출처
