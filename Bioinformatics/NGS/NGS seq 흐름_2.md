@@ -59,6 +59,16 @@ DESeq2는 DEG분석의 대표적인 방법 중의 하나로, 차세대 염기서
 
 The DESeq2 package is designed for normalization, visualization, and differential analysis of highdimensional count data. It makes use of empirical Bayes techniques to estimate priors for log fold change and dispersion, and to calculate posterior estimates for these quantities.
 
+DEG 분석을 수행하면 두 개의 결과를 반드시 얻는다. (Fold-change와 P-value)요소이다. Fold change란, 어떤 유전자에 대하여 실험군에서의 평균발현량이 대조군에서의 평균발현량의 몇 배인지를 나타내고, P-value는 두 군의 평균발현량 차이가 통계적으로 유의미한 값인지를 알려준다.
+
+생명과학 연구에서 유전자 발현량을 두 조건에 대하여 서로 비교하고자할 때 fold change(FC)를 많이 이용한다. 이 수치는 DEG(differentially expressed gene)을 찾는데 매우 중요한 의미를 갖는다. FC의 정의는 비교 조건(treatment)의 값을 기준 조건(control)의 값으로 나누는 것이다.
+
+FC = treatment / control
+
+FC = treatment/control라는 수식을 그대로 따르면 1을 기준으로 너무나 비대칭적인 값을 얻게 된다는 것도 문제이다. 즉 control < treatment이면 FC는 1보다 큰 값을 가지며 그 범위도 매우 넓다. 그러나 control > treatment 이면? 0 < FC < 1이 되어 너무 좁은 범위에 FC가 분포하게 된다. 이를 해결하는 방법 중 하나는 FC를 그대로 쓰지 않고 log2(FC)로 전환하는 것이다. 단 FC = 0인 것은 적절히 제거를 하든지 전처리를 해야 한다.
+
+
+
 <br>
 
 **Code 이해**
@@ -104,3 +114,6 @@ dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condit
 
 [HTSeq] http://www.incodom.kr/HTSeq#h_83acc28eabd73c7c5ff5c98b103e98ce
 
+[Deseq2] http://blog.genoglobe.com/2017/10/fold-change.html
+
+[Deseq2] http://blog.naver.com/PostView.nhn?blogId=cjh226&logNo=221360753408
