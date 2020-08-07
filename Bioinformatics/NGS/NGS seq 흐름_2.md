@@ -110,6 +110,58 @@ dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condit
 
 
 
+## Variant 
+
+인간 Exome-seq VCF 파일에 수록된 변이들에 대한 기능적 주석 달기
+
+: Ensembl VEP라는 웹 서비스를 사용하면 두 가지 종류의 작업을 하는데, 하나는 dbSNP와 같은 데이터베이스에 등재된 변이인지 여부를 알려주는 것이고, 나머지 하나는 변이가 가져올 수 있는 유전자 기능적인 변화를 예측하는 것이다.
+
+
+
+$ bcftools stats NA18959.chrom20.ILLUMINA.bwa.JPT.exome.20121211.bcf | less –S
+
+Annotation : VCF 파일의 Variants에 대해 dbSNP에 등재되어있는지 확인하는 과정
+
+(여기서는 Ensembl VEP 서비스를 이용한다.)
+
+구글 > ensembl VEP > Web interface > GRCh37 website 클릭 >
+
+$ bcftools view NA18959.chrom20.ILLUMINA.bwa.JPT.exome.20121211.bcf
+
+\> NA18959.chrom20.ILLUMINA.bwa.JPT.exome.20121211.vcf
+
+\> NA18959.chrom20.ILLUMINA.bwa.JPT.exome.20121211.vcf 파일 업로드
+
+\> Additional annotations에서 Phenotypes 선택 > Run
+
+http://grch37.ensembl.org/Homo_sapiens/Tools/VEP/Results?tl=lFqOJVjcqHlrUtOt-6200437
+
+
+
+\> Download All VCF (ensembl_VEP_result.vcf으로 이름 변경)
+
+$ less -S ensembl_VEP_result.vcf
+
+$ egrep "\|rs[[:digit:]]+" ensembl_VEP_result.vcf | less –S (rs를 가지는 경우만 확인)
+
+$ egrep "\|rs[[:digit:]]+" ensembl_VEP_result.vcf | wc –l (rs를 가지는 개수)
+
+$ egrep "^#|\|rs[[:digit:]]+" ensembl_VEP_result.vcf | less –S (rs와 Header 함께 확인)
+
+$ egrep "^#|\|rs[[:digit:]]+" ensembl_VEP_result.vcf > known.vcf
+
+$ bcftools stats known.vcf | less –S
+
+
+
+
+
+
+
+
+
+<br>
+
 ## 출처
 
 [HTSeq] http://www.incodom.kr/HTSeq#h_83acc28eabd73c7c5ff5c98b103e98ce
@@ -117,3 +169,5 @@ dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condit
 [Deseq2] http://blog.genoglobe.com/2017/10/fold-change.html
 
 [Deseq2] http://blog.naver.com/PostView.nhn?blogId=cjh226&logNo=221360753408
+
+[Variant] https://blog.naver.com/glow216/222003671172
