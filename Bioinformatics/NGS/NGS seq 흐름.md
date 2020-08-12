@@ -14,7 +14,9 @@
 
    : reference genome에 alignment 하기
 
-   : HISAT 사용
+   : HISAT 사용 
+
+   : samtools로 sam -> bam 변환
 
 4. read counting
 
