@@ -97,14 +97,17 @@ dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condit
   dds <- DESeq2::DESeqDataSetFromMatrix(
     countData = cts, 
     colData   = coldata, 
-    design    = ~treatment
+    design    = ~batch + condition
     )
   
+  # count matrix called cts and a table of sample information called coldata. 
+  # The design indicates how to model the samples, here, that we want to measure the effect of the condition, controlling for batch differences. The two factor variables batch and condition should be columns of coldata.
+  
   # countData is your experimental data, prepared as above;
-  # colData is your coldata matrix, with experimental metadata;
+# colData is your coldata matrix, with experimental metadata;
   # ~treatment is the formula, describing the experimental model you test in your experiment. It could be anything like ~ treatment + sex * age etc.
   ```
-
+  
 * To use DESeqDataSetFromMatrix, the user should provide the counts matrix, the information about the samples (the columns of the count matrix) as a DataFrame or data.frame, and the `design` formula. 
 * To demonstate the use of DESeqDataSetFromMatrix, we will read in count data from the pasilla package. We read in a count matrix, which we will name `count Data`, and the sample information table, which we will name `colData`.
 
