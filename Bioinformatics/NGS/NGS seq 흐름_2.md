@@ -104,12 +104,28 @@ dds <- DESeqDataSetFromMatrix(countData = JKreadcount, colData = design =~condit
   # The design indicates how to model the samples, here, that we want to measure the effect of the condition, controlling for batch differences. The two factor variables batch and condition should be columns of coldata.
   
   # countData is your experimental data, prepared as above;
-# colData is your coldata matrix, with experimental metadata;
-  # ~treatment is the formula, describing the experimental model you test in your experiment. It could be anything like ~ treatment + sex * age etc.
   ```
-  
+
+<br>
+
+colData is your coldata matrix, with experimental metadata; ~treatment is the formula, describing the experimental model you test in your experiment. It could be anything like ~ treatment + sex * age etc.
+
 * To use DESeqDataSetFromMatrix, the user should provide the counts matrix, the information about the samples (the columns of the count matrix) as a DataFrame or data.frame, and the `design` formula. 
 * To demonstate the use of DESeqDataSetFromMatrix, we will read in count data from the pasilla package. We read in a count matrix, which we will name `count Data`, and the sample information table, which we will name `colData`.
+
+<br>
+
+```R
+baseMean <- sapply(levels(dds$condition), function(lvl) rowMeans(counts(JKdds$condition == lvl)))
+res <- cbind(baseMean, res)
+```
+
+* sapply 함수: 모든 기준 및 연산 과정이 lappy와 동일하며, 차이점은 리턴값이 행렬 또는 벡터라는 점 뿐이다. sapply(데이터, 연산)
+* levels 함수: factor형의 값으로서, 미리 정해진(predefined), 한정된 수의 범주형 값(finite number of categorical values)을 수준(levels) 이라고 합니다. **요인 데이터의 수준을 확인하거나 지정, 변경하려면 levels() 함수**를 사용한다.
+* function 함수: 사용자 정의 함수, function(인자)
+* 
+
+
 
 
 
@@ -174,3 +190,6 @@ $ bcftools stats known.vcf | less –S
 [Deseq2] http://blog.naver.com/PostView.nhn?blogId=cjh226&logNo=221360753408
 
 [Variant] https://blog.naver.com/glow216/222003671172
+
+[levels 함수] 출처: https://rfriend.tistory.com/32
+
