@@ -88,7 +88,7 @@ ____
 
    * The central red line is the median value 
 
-   * The yellow box represents the inter-quartile range (25-75%) 
+   * The yellow box represents the inter-quartile range (25-75%) . The upper and lower whiskers represent the 10th and 90th percentile scores.
 
    * The upper and lower whiskers represent the 10% and 90% points 
 
@@ -104,6 +104,10 @@ ____
 
    The per sequence quality score report allows you to see if a subset of your sequences have universally low quality values
 
+   A plot of the total number of reads vs the average quality score over full length of that read.
+
+   What to look for: The distribution of average read quality should be fairly tight in the upper range of the plot.
+
    <br>
 
 4. Per base sequence content
@@ -111,6 +115,8 @@ ____
    <img src="https://i.imgur.com/hxUW2Cn.png" alt="High A in &quot;Per base sequence content&quot; of fastQC report" style="zoom: 67%;" />
 
    * Per Base Sequence Content plots out the proportion of each base position in a file for which each of the four normal DNA bases has been called.
+
+   * This plot reports the percent of bases called for each of the four nucleotides at each position across all reads in the file. Again, the X-axis is non-uniform as described for Per base sequence quality.
 
    * 랜덤 라이브러리에서는 시퀀스 실행의 서로 다른 기준간에 거의 또는 전혀 차이가 없을 것으로 예상되므로 이 플롯의 선은 서로 평행하게 실행되어야 한다. 각 염기의 상대적인 양은 게놈에서 이러한 염기의 전체적인 양을 반영해야하지만, 어떤 경우에도 서로 크게 불균형해서는 안된다.
 
@@ -124,13 +130,19 @@ ____
 
    * This module measures the GC content across the whole length of each sequence in a file and compares it to a modelled normal distribution of GC content.
 
+   * Plot of the number of reads vs. GC% per read. The displayed Theoretical Distribution assumes a uniform GC content for all reads.
+
      <br>
 
 6. Per base N content
 
    <img src="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/per_base_n_content.png" alt="Per Base N Content" style="zoom: 50%;" />
 
-   * If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base] call This module plots out the percentage of base calls at each position for which an N was called.
+   * If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base call This module plots out the percentage of base calls at each position for which an N was called.
+
+   * Percent of bases at each position or bin with no base call, i.e. ‘N’.
+
+   * What to expect: You should never see any point where this curve rises noticeably above zero. If it does this indicates a problem occurred during the sequencing run. The example below is a case where an error caused the instrument to be unable to call a base for approximately 20% of the reads at position 29.
 
      <br>
 
@@ -156,19 +168,49 @@ ____
 
    <img src="https://i.imgur.com/AYv7nyq.png" alt="3' Tag-Seq / DE Analysis - FASTQC detects overrepresented ..." style="zoom: 25%;" />
 
-   
+   * List of sequences which appear more than expected in the file. Only the first 50bp are considered. A sequence is considered overrepresented if it accounts for ≥ 0.1% of the total reads. Each overrepresented sequence is compared to a list of common contaminants to try to identify it.
+
+   * What to expect: In DNA-Seq data no single sequence should be present at a high enough frequency to be listed, though it is not unusual to see a small percentage of adapter reads. For RNA-Seq data it is possible that there may be some transcripts that are so abundant that they register as overrepresented sequence.
+
+   <br>
 
 10. Adapter Content
 
     <img src="https://galaxyproject.github.io/training-material/topics/sequence-analysis/images/quality-control/adapter_content.png" alt="Quality Control" style="zoom:50%;" />
 
+    * Cumulative plot of the fraction of reads where the sequence library adapter sequence is identified at the indicated base position. Only adapters specific to the library type are searched.
+    * What to expect: Ideally Illumina sequence data should not have any adapter sequence present, however when using long read lengths it is possible that some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3’ end of the read. This is more likely to occur with RNA-Seq libraries where the distribution of library insert sizes is more varied and likely to include some short inserts. The example below is for a high quality RNA-Seq library with a small percentage of the library having inserts smaller than 150bp
+
+    <br>
+
 11. Kmer Content
 
     ![kmer content failling with fastqc](https://preview.ibb.co/gfAMbT/kmer.png)
 
+    * The Kmer module starts from the assumption that any small fragment of sequence should not have a positional bias in its apearance within a diverse library. There may be biological reasons why certain Kmers are enriched or depleted overall, but these biases should affect all positions within a sequence equally. This module therefore measures the number of each 7-mer at each position in your library and then uses a binomial test to look for significant deviations from an even coverage at all positions. Any Kmers with positionally biased enrichment are reported. The top 6 most biased Kmer are additionally plotted to show their distribution.
+    * k-mer는 일반적으로 문자열(string)에서 가능한 모든 부분문자열(substring)의 길이 k를 의미한다. 유전체학에서 k-mer는 DNA sequencing으로 얻은 read의 모든 가능한 부분 서열(의 길이 k)을 의미한다. L이라는 길이의 문자열이 주어졌을 때, k-mer의 양은 ***L*** **-** ***k***  **+ 1이며,** n 개(예를 들어 DNA의 ATCG의 경우 4)에 대해 가능한 k-mer의 개수는 ***n******k*** 이다.
+    
+    * k-mer는 일반적으로 sequence assembly에 사용되지만, sequence alignment에도 사용될 수 있다. 인간 유전체 관점에서, 돌연변이율의 가변성을 설명하는데 다양한 길이의 k-mer가 사용되었다.
+    
+    
+    
+    * **예제**
+    
+      특정 k 값이 주어졌을 때 DNA 서열에서 가능한 k-mer에 대한 예제:
+    
+      Read: AGATCGAGTG
+    
+      3-mers: AGAGATATCTCGCGAGAGAGTGTG 
+    
+      Read: GTAGAGCTGT
+    
+      5-mers: GTAGATAGAGAGAGCGAGCTAGCTGGCTGT
+    
     <br>
 
 => 주로 보는 part는 **Basic Statistics / Per base sequence quality / Sequence Length Distribution / Adapter Content** 이다. 
+
+참조) https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/
 
 <br>
 
