@@ -117,6 +117,20 @@ OPTIONS:
                   not specified.
 ```
 
+<Br>
+
+## Trimmomatic
+
+### Adapter
+
+**Custom adapter sequence의 제작**
+
+Custom adapter sequence를 제작하기 위해서는 Trimmomatic의 작동 전략을 이해하는 것이 유리하다. Trimmomatic은 Palindrome 과 simple 전략을 adapter trimming 에 적용하고있다. Simple trimming 은 주어진 adpater fasta 에 있는 각각의 adapter sequence 들이 NGS reads 과의 비교를 통해 유의한 수준 이상의 정확도를 보이는 경우, 해당 NGS reads 는 clipping 된다. 반면, Palindrome trimming 은 단순한 비교가 아닌 paired-end mode 에서 양쪽 서열 모두 contaminant 가 있는지 확인을 한다. Paired-end sequencing 의 경우 대부분의 경우에 3' end of reads에 adapter 서열이 존재하므로, 양쪽 서열에 이를 확인해 adapter trimming 을 수행한다. 이는 Simple trimming 보다 정확한 trimming result를 기대할 수 있다.
+
+네이밍은 반드시 'Prefix' 이후에 /1 과 /2 로 제작되어야 한다.
+
+<Br>
+
 
 
 <br>
@@ -124,3 +138,5 @@ OPTIONS:
 ## 참조
 
 [base calling] https://chamath2.tistory.com/215
+
+[Trimmomatic] http://www.incodom.kr/Trimmomatic/Adapter
