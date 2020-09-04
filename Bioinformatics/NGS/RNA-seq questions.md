@@ -131,6 +131,37 @@ Custom adapter sequence를 제작하기 위해서는 Trimmomatic의 작동 전�
 
 <Br>
 
+### Command line  중 이해안간 것들
+
+```c
+for i in 'cat ../FASTQ/fastq1.list'
+	do
+	#echo $i
+	ifp=${i%_*z}
+	ifpfz=${ifp}.'fp.gz'
+	
+	echo '---', $ifp
+	#echo $i, $ifp, $ifpfz
+```
+
+* ifp=${i%_*z}
+
+-> 의미: 
+
+* echo '---', $ifp
+
+<br>
+
+### 모르는 단어 정리
+
+Technical seq 
+
+1. adapter
+2. Kmer
+3. PCR
+
+<br>
+
 
 
 <br>
