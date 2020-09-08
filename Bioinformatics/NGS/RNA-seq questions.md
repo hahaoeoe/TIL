@@ -224,6 +224,19 @@ $ cat file | more
 
 Sequencing 단계가 끝나면 alignment와 quantification(수량화) 작업을 수행한다. Alignment 단계란 reference assembly의 한 부분으로 표준 유전체에서 read와 얼마만큼 일치하는 서열을 찾을 지(예, 100% 동일한 서열만 허용할 것인지, read의 서열 중 서로 같지 않는 부분을 한 개까지 허용할 것인지 지정)를 설정하고 일치하는 부분의 위치를 찾는 작업이다. Alignment 작업이 끝나면 전체 유전체 서열 상에 전사체 분석을 위해 만들어진 read들이 알맞은 위치에 매핑(mapping)되게 된다. 매핑된 read들의 위치와 양을 분석하여 이는 어떤 유전자들이 얼마만큼 발현되었는지를 정의하는 quantification 작업을 수행하게 된다. 
 
+* HISAT = Hierarchical Indexing for Spliced Alignment of Transcripts
+* Fast spliced aligner with low memory requirement
+* Reference genome is (BWT FM) indexed for fast searching
+  - Currently Chipster offers human and mouse reference genome 
+  - Let us know if you need others
+  - You can provide own (small) reference genome in fasta format
+* Uses two types of indexes
+  * A global index: used to anchor a read in genome (28 bp is enough)
+  * Thousands of small local indexes, each covering a genomic region of 56 Kbp: used for rapid extension of alignments (good for spliced read with short anchors)
+* Uses splice site information found during the alignment of earlier reads in the same run
+
+<br>
+
 ### grcm38_tran
 
 -> tran과 snp 등등의 차이점 정리
@@ -232,6 +245,190 @@ Sequencing 단계가 끝나면 alignment와 quantification(수량화) 작업을 
 - genome_snp: HGFM index for reference plus SNPs
 - genome_tran: HGFM index for reference plus transcripts
 - genome_snp_tran: HGFM index for reference plus SNPs and transcripts
+
+<br>
+
+### Splice-aware aligners in Chipster
+
+1. STAR
+
+   Human genome available
+
+2. HISAT2
+
+   Human and mouse genome availabel
+
+   You can also supply own genome if it is small
+
+3. Tophat2
+
+   Many genomes available
+
+   You can also supply own genome
+
+4. Output files
+
+   BAM = contains the alignments
+
+   bai = index file for BAM, required by genome browsers etc
+
+   log = useful information about the alignment run
+
+<br>
+
+### Command line  중 이해안간 것들
+
+**환경변수**
+
+```c
+export PATH="/home/cylee/bin/usr/bin:$PATH"
+```
+
+환경변수란 운영체제 즉 리눅스, 윈도우, 유닉스 등에서는 모두 path환경변수가 존재한다. 
+
+사용자의 명령을 기다리는 프롬프트 상에서 command를 내리면 그 실행파일을 OS가 찾게 되는데 어디에서 찾냐면 path에 설정되어 있는 곳에서 찾는다.
+
+path에 셋팅된 위치에 있는 명령어는 그냥 명령어만 치면 실행이 되고,
+
+path에 셋팅되지 않은 명령어는 명령어의 위치를 나타내는 절대경로를 사용하여야 한다.
+
+※ path란? 사용자가 정의해놓은 길을 의미한다. path에 있는 경로를 따라가면 이런 명령어들을 실행할 수 있을거야~ 같이...
+
+절대경로는 C:\xxx\xxx 처럼, root디렉토리에서부터 명령어(실행파일) 있는 곳까지의 경로를 다 적는 것을 말한다.
+
+path 설정을 왜 사용하는 것일까? 물론 매번 사용자들이 절대경로를 모두 알고 일일이 사용할 때 마다 절대경로를 사용한다면 상관없지만 솔직히 귀찮지 않은가... 사용자의 편의를 위해 사용되는 것이다
+
+예를 들어 사용자가 만든 프로그램 test1가 /usr/bin/local/test 에 있다고 가정을 할 때..
+
+사용자 위치는 /home/testuser 이라고 가정을 하자.
+
+사용자가 test1 명령을 수행하기 위해 /usr/bin/local/test/test1 을 수행해야 한다.
+
+하지만 path=.;/usr/bin/local/test
+
+라는 설정이 추가되어 있다면, test1 수행만으로 실행이 되는 것이다.
+
+왜냐? path에서 이미 /usr/bin/local/test로 가면 test1이라는게 있다고 미리 정의해놨으니까! 길을 터놓은 셈이다.
+
+리눅스에 예를 들어보자.
+
+cd, ls 등 이런 명령어들은 어딘가의 경로에 디렉토리 안에서 프로그램으로 존재하고 있다. (명령어니까)
+
+그래서 이 프로그램들을 실행하기 위해서는 각각의 절대경로를 사용해서 /bin/ls 이런식으로 일일이 써줘야지 명령어가 먹힌다. 하지만 이런것들을 모두 타이핑 하지 않고도 cd, ls 이렇게만 써줘도 사용가능한 이유가 환경변수 때문이다. 그 이유는... 환경변수에 명시되어 있기 때문이다.
+
+자, 그렇다면 운영체제가 명령어들을 찾는 순서를 알아볼까?
+
+/etc/profile -> /etc/bashrc -> /etc/inputrc -> $HOME/.bash_profile -> $HOME/.bashrc -> $HOME/.inputrc 이런식으로 찾아보게 된다.
+
+ 
+
+.bashrc : 주로 alias가 등록되어 있다.
+
+.bash_profile : path같은 환경변수가 등록되어 있다.
+
+.bash_history : 사용한 명령어가 기록되어 있다.
+
+.bash_logout : 로그아웃시 실행할 명령어가 기록되어 있다.
+
+ 
+
+자, 그렇다면 환경변수 path에 내가 만든 프로그램을 실행시키고 싶어 절대경로가 아닌 그 프로그램명만 입력했을때 바로 실행되게 하려면 어떻게 해야할까?
+
+path환경변수에 넣어주면 된다.
+
+export PATH=[추가할경로]:$PATH를 입력하면 환경변수에 추가된다.
+
+환경변수의 구분자는 :이다.
+
+echo $PATH를 사용해서 지금 사용하고 있는 리눅스에 어떤 환경변수들이 저장되어 있는지 알아보자.
+
+![img](https://t1.daumcdn.net/cfile/tistory/22796C4E567918EE06)
+
+<br>
+
+### HISAT2 options
+
+- ‘-p 8’ tells HISAT2 to use eight CPUs for bowtie alignments.
+
+- ’–dta’ Reports alignments tailored for transcript assemblers.
+
+- --dta-cufflinks
+
+  reports alignments tailored specifically for cufflinks
+
+- `--dta/--downstream-transcriptome-assembly`  Report alignments tailored for transcript assemblers including StringTie. With this option, HISAT2 requires longer anchor lengths for de novo discovery of splice sites. This leads to fewer alignments with short-anchors, which helps transcript assemblers improve significantly in computation and memory usage.
+
+- ‘-x /path/to/hisat2/index’ The HISAT2 index filename prefix (minus the trailing .X.ht2) built earlier including splice sites and exons.
+
+- ‘-1 /path/to/read1.fastq.gz’ The read 1 FASTQ file, optionally gzip(.gz) or bzip2(.bz2) compressed.
+
+- ‘-2 /path/to/read2.fastq.gz’ The read 2 FASTQ file, optionally gzip(.gz) or bzip2(.bz2) compressed.
+
+- ‘-S /path/to/output.sam’ The output SAM format text file of alignments.
+
+<br>
+
+### alignment summary 저장
+
+hisat2 mapping 이 끝나면 alignment summary 가 출력 되는데 이 내용이 따로 저장되지 않고 standard error ("stderr") 로 출력 됩니다. 하지만, 이 내용은 중요한 정보이기 때문에 stderr 를 저장하는 명령어를 통해 저장합니다.
+
+저는 command 뒤에 2>&1 |tee alignmet.summary 이런식으로 지정을 해줍니다.
+
+```c
+hisat2 -p 8 -x IndexName -1 forward.fastq -2 reverse.fastq -S output.sam --dta-cufflinks 2>&1 |tee alignmet.summary
+```
+
+
+
+ex) alignment.summary 에서 overall alignment rate 계산하는 방법
+
+37537336 reads; of these:
+
+ 37537336 (100.00%) were paired; of these:
+
+  986245 (2.63%) aligned concordantly 0 times
+
+  33036211 (88.01%) aligned concordantly exactly 1 time
+
+  3514880 (9.36%) aligned concordantly >1 times
+
+  ----
+
+  986245 pairs aligned concordantly 0 times; of these:
+
+   112422 (11.40%) aligned discordantly 1 time
+
+  ----
+
+  873823 pairs aligned 0 times concordantly or discordantly; of these:
+
+   1747646 mates make up the pairs; of these:
+
+​    1077358 (61.65%) aligned 0 times
+
+​    579867 (33.18%) aligned exactly 1 time
+
+​    90421 (5.17%) aligned >1 times
+
+
+
+98.56% overall alignment rate
+
+98.56% = {33036211 + 3514880 + 112422 + (579867 + 90421) / 2} / 37537336 x 100
+
+
+
+<br>
+
+## Alignment ; Samtools
+
+### Description
+
+Samtools is a set of utilities that manipulate alignments in the BAM format. It imports from and exports to the SAM (Sequence Alignment/Map) format, does sorting, merging and indexing, and allows to retrieve reads in any regions swiftly.
+
+Samtools is designed to work on a stream. It regards an input file `-' as the standard input (stdin) and an output file `-' as the standard output (stdout). Several commands can thus be combined with Unix pipes. Samtools always output warning and error messages to the standard error output (stderr).
+
+Samtools is also able to open a BAM (not SAM) file on a remote FTP or HTTP server if the BAM file name starts with `ftp://' or `http://'. Samtools checks the current working directory for the index file and will download the index upon absence. Samtools does not retrieve the entire alignment file unless it is asked to do so.
 
 <br>
 
@@ -265,7 +462,11 @@ read조각들을 조립하여 사람의 전체 유전 서열을 만들어내는 
 
 또한, 유전자 변이를 통해 발생한 질병들을 진단하기도 하며, 치료제 개발에 획기적인 정보를 제공하기도 한다. 보통 유전형질 분석에는 SNP 분석이 중요하게 작용하며 이를 통해 유전적 질병의 이해와 예방, 맞춤약물의 개발을 가능하게 한다.
 
+<br>
 
+### 존스 홉킨스 대학 컴퓨터 생물학 센터 (Johns Hopkins University: Center for Computational Biology) 생물정보학 프로그램 툴 모음
+
+**[출처]** [존스 홉킨스 대학 컴퓨터 생물학 센터 (Johns Hopkins University: Center for Computational Biology) 생물정보학 프로그램 툴 모음](https://blog.naver.com/naturelove87/221498468900)|**작성자** [랩몬LM](https://blog.naver.com/naturelove87)
 
 <br>
 
@@ -281,3 +482,6 @@ read조각들을 조립하여 사람의 전체 유전 서열을 만들어내는 
 
 [genotyping] https://blog.naver.com/nanohelix/220070673859
 
+[환경변수] https://itdexter.tistory.com/251 [IT_Dexter]
+
+[samtools] https://pd3.github.io/www.htslib.org/doc/samtools-1.7.html
