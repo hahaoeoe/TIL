@@ -392,13 +392,13 @@ ex) alignment.summary 에서 overall alignment rate 계산하는 방법
 
   3514880 (9.36%) aligned concordantly >1 times
 
-  ----
+----
 
   986245 pairs aligned concordantly 0 times; of these:
 
    112422 (11.40%) aligned discordantly 1 time
 
-  ----
+----
 
   873823 pairs aligned 0 times concordantly or discordantly; of these:
 
@@ -431,6 +431,119 @@ Samtools is designed to work on a stream. It regards an input file `-' as the st
 Samtools is also able to open a BAM (not SAM) file on a remote FTP or HTTP server if the BAM file name starts with `ftp://' or `http://'. Samtools checks the current working directory for the index file and will download the index upon absence. Samtools does not retrieve the entire alignment file unless it is asked to do so.
 
 <br>
+
+### Command and Options
+
+**sort**
+
+samtools sort [**-l** *level*] [**-m** *maxMem*] [**-o** *out.bam*] [**-O** *format*] [**-n**] [**-t** *tag*] [**-T** *tmpprefix*] [**-@** *threads*] [*in.sam*|*in.bam*|*in.cram*]
+
+Sort alignments by leftmost coordinates, or by read name when **-n** is used. An appropriate **@HD-SO** sort order header tag will be added or an existing one updated if necessary.
+
+The sorted output is written to standard output by default, or to the specified file (*out.bam*) when **-o** is used. This command will also create temporary files *tmpprefix*.%d**.bam** as needed when the entire alignment data cannot fit into memory (as controlled via the **-m** option).
+
+**Options:**
+
+- **-l** *INT*
+
+  Set the desired compression level for the final output file, ranging from 0 (uncompressed) or 1 (fastest but minimal compression) to 9 (best compression but slowest to write), similarly to **gzip**(1)'s compression level setting.If **-l** is not used, the default compression level will apply.
+
+- **-m** *INT*
+
+  Approximately the maximum required memory per thread, specified either in bytes or with a **K**, **M**, or **G** suffix. [768 MiB]To prevent sort from creating a huge number of temporary files, it enforces a minimum value of 1M for this setting.
+
+- **-n**
+
+  Sort by read names (i.e., the **QNAME** field) rather than by chromosomal coordinates.
+
+- **-t** *TAG*
+
+  Sort first by the value in the alignment tag TAG, then by position or name (if also using **-n**). **-o** *FILE* Write the final sorted output to *FILE*, rather than to standard output.
+
+- **-O** *FORMAT*
+
+  Write the final output as **sam**, **bam**, or **cram**.By default, samtools tries to select a format based on the **-o** filename extension; if output is to standard output or no format can be deduced, **bam** is selected.
+
+- **-T** *PREFIX*
+
+  Write temporary files to *PREFIX***.***nnnn***.bam,** or if the specified *PREFIX* is an existing directory, to *PREFIX***/samtools.***mmm***.***mmm***.tmp.***nnnn***.bam,** where *mmm* is unique to this invocation of the **sort** command.By default, any temporary files are written alongside the output file, as *out.bam***.tmp.***nnnn***.bam,** or if output is to standard output, in the current directory as **samtools.***mmm***.***mmm***.tmp.***nnnn***.bam.**
+
+- **-@** *INT*
+
+  Set number of sorting and compression threads. By default, operation is single-threaded.
+
+**Ordering Rules**
+
+The following rules are used for ordering records.
+
+If option **-t** is in use, records are first sorted by the value of the given alignment tag, and then by position or name (if using **-n**). For example, “-t RG” will make read group the primary sort key. The rules for ordering by tag are:
+
+
+
+- Records that do not have the tag are sorted before ones that do.
+- If the types of the tags are different, they will be sorted so that single character tags (type A) come before array tags (type B), then string tags (types H and Z), then numeric tags (types f and i).
+- Numeric tags (types f and i) are compared by value. Note that comparisons of floating-point values are subject to issues of rounding and precision.
+- String tags (types H and Z) are compared based on the binary contents of the tag using the C **strcmp**(3) function.
+- Character tags (type A) are compared by binary character value.
+- No attempt is made to compare tags of other types — notably type B array values will not be compared.
+
+When the **-n** option is present, records are sorted by name. Names are compared so as to give a “natural” ordering — i.e. sections consisting of digits are compared numerically while all other sections are compared based on their binary representation. This means “a1” will come before “b1” and “a9” will come before “a10”. Records with the same name will be ordered according to the values of the READ1 and READ2 flags (see **flags**).
+
+When the **-n** option is **not** present, reads are sorted by reference (according to the order of the @SQ header records), then by position in the reference, and then by the REVERSE flag.
+
+**Note**
+
+
+
+Historically **samtools sort** also accepted a less flexible way of specifying the final and temporary output filenames:
+
+samtools sort [**-f**] [**-o**] *in.bam out.prefix*
+
+This has now been removed. The previous *out.prefix* argument (and **-f** option, if any) should be changed to an appropriate combination of **-T** *PREFIX* and **-o** *FILE*. The previous **-o** option should be removed, as output defaults to standard output.
+
+
+
+**index**
+
+samtools index [**-bc**] [**-m** *INT*] *aln.bam*|*aln.cram* [*out.index*]
+
+Index a coordinate-sorted BAM or CRAM file for fast random access. (Note that this does not work with SAM files even if they are bgzip compressed — to index such files, use tabix(1) instead.)
+
+This index is needed when *region* arguments are used to limit **samtools view** and similar commands to particular regions of interest.
+
+If an output filename is given, the index file will be written to *out.index*. Otherwise, for a CRAM file *aln.cram*, index file *aln.cram***.crai** will be created; for a BAM file *aln.bam*, either *aln.bam***.bai** or *aln.bam***.csi** will be created, depending on the index format selected.
+
+**Options:**
+
+- **-b**
+
+  Create a BAI index. This is currently the default when no format options are used.
+
+- **-c**
+
+  Create a CSI index. By default, the minimum interval size for the index is 2^14, which is the same as the fixed value used by the BAI format.
+
+- **-m** *INT*
+
+  Create a CSI index, with a minimum interval size of 2^INT.
+
+<br>
+
+## Stringtie
+
+**StringTie** is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional *de novo* assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only alignments of short reads that can also be used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads. In order to identify differentially expressed genes between experiments, StringTie's output can be processed by specialized software like [Ballgown](https://github.com/alyssafrazee/ballgown), [Cuffdiff](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/index.html) or other programs (DESeq2, edgeR, etc.).
+
+<br>
+
+| `-e`                    | Limits the processing of read alignments to only estimate and output the assembled transcripts matching the reference transcripts given with the `-G` option (requires `-G`, recommended for `-B/-b`). With this option, read bundles with no reference transcripts will be entirely skipped, which may provide a considerable speed boost when the given set of reference transcripts is limited to a set of target genes, for example. |
+| ----------------------- | ------------------------------------------------------------ |
+| `-B`                    | This switch enables the output of *Ballgown* input table files (*.ctab) containing coverage data for the reference transcripts given with the -G option. (See the [Ballgown documentation](https://github.com/alyssafrazee/ballgown) for a description of these files.) With this option StringTie can be used as a direct replacement of the *tablemaker* program included with the Ballgown distribution. If the option `-o `is given as a full path to the output transcript file, StringTie will write the *.ctab files in the same directory as the output GTF. |
+| `-p <int>`              | Specify the number of processing threads (CPUs) to use for transcript assembly. The default is 1. |
+| `-G <ref_ann.gff>`      | Use the reference annotation file (in [GTF or GFF3 format](http://ccb.jhu.edu/software/stringtie/gff.shtml)) to guide the assembly process. The output will include expressed reference transcripts as well as any novel transcripts that are assembled. This option is required by options -B, -b, -e, -C (see below). |
+| `-o [<path/>]<out.gtf>` | Sets the name of the output GTF file where StringTie will write the assembled transcripts. This can be specified as a full path, in which case directories will be created as needed. By default StringTie writes the GTF at standard output. |
+| `-A <gene_abund.tab>`   | Gene abundances will be reported (tab delimited format) in the output file with the given name. |
+
+<Br>
 
 ## Analysis
 
@@ -485,3 +598,5 @@ read조각들을 조립하여 사람의 전체 유전 서열을 만들어내는 
 [환경변수] https://itdexter.tistory.com/251 [IT_Dexter]
 
 [samtools] https://pd3.github.io/www.htslib.org/doc/samtools-1.7.html
+
+[stringtie] http://ccb.jhu.edu/software/stringtie/index.shtml?t=manual
