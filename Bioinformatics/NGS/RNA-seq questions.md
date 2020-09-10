@@ -545,6 +545,12 @@ If an output filename is given, the index file will be written to *out.index*. O
 
 <Br>
 
+### Transcript assembly and quantification with StringTie
+
+
+
+<br>
+
 ## Analysis
 
 마지막으로 Analysis(분석) 단계에서는 측정된 유전자의 종류와 발현량을 이용하여 특정조직과 유전자 간의 연관성을 밝히거나 유전자들 사이의 연관성 등을 찾는 작업을 진행한다. 
