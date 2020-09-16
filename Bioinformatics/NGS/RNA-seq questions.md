@@ -547,6 +547,156 @@ If an output filename is given, the index file will be written to *out.index*. O
 
 ### Transcript assembly and quantification with StringTie
 
+<br>
+
+## HTseq-count
+
+### GTF format
+
+GFF와 GTF는 데이터 형식들로서 **genome** **annotation 정보**를 저장하는데 사용됩니다. 이 두 가지의 형식은 자주 호환되어 사용되는 것을 볼 수 있습니다. 그러나 **GFFs (general feature format)**는 사실 모든 유전체 요소에 사용되는 반면, **GTF (gene transfer format)**은 오직 유전자에게만 한정되어 사용됩니다.
+
+두 파일의 형식은 서로 매우 비슷하여, 꽤 쉽게 전환이 가능합니다. 하지만 변환할 때 문제점 한 가지는 GFF 파일의 줄들이 특징적인 block들로 정리되어 있지 않다는 것입니다.
+그러므로 이 글에서는 두 형식이 서로 어떻게 다르고 어떻게 변환하는지에 대해서 보여줄 것입니다.
+
+**데이터 형식**
+GFF와 GTF 형식 둘 다 탭(Tab) 분리된 파일로 9개의 열로 이루어져 있습니다. 두 형식의 처음 8개 열은 몇 가지의 특정 버전 요구 사항을 제외하고는 같습니다. 처음 8개 열에 대한 설명과 예제는 아래와 같습니다. 
+
+1. **Reference sequence name** (chromosome1, refContig1, sequence1)
+2. Source of annotation** (pfam, blast2go, interpro, est)
+3. Type of feature** (gene, exon, start_codon, cds, mRNA, zinc_finger, conserved_region)
+4. **1-based, inclusive start coordinate** (integer > 0), 시작 좌표
+5. **1-based, inclusive end coordinate** (integer > 0), 끝 좌표
+6. **Score**
+7.  **Strand** (+,-,.)
+8. **Frame** (0,1,2)
+
+시작과 끝 좌표는 1-based로, 이것은 첫 번째 염기 위치가 1이라는 것을 뜻합니다. 반면에 0-based는 위치가 0에서부터 시작합니다. 포괄적인 좌표의 뜻은 하나의 유전체 요소가 시작과 끝 좌표를 포함하는 것을 의미합니다. 예를 들어 어떤 요소가 10-15라는 좌표를 가지고 있다면 처음과 끝인 10과 15를 포함한 10, 11, 12, 13, 14, 15 위치들로 정의가 됩니다. 반면에 같은 경우의 비포괄적 좌표는 11, 12, 13, 14 위치들로만 정의됩니다.
+
+GFF 파일의 **6. Score** 열은 이 요소가 존재할 수 있는 확률 값을 나타냅니다. 이것은 GTF 형식에서는 사용되지 않습니다. **7. Strand**는 특정 유전체 요소의 reference sequence에 대한 상대적인 방향성입니다. 이것은 정방향은 ‘+’, 역방향은 ‘-‘, 미상은 ’.’으로 나타냅니다. **8. Frame** 열은 coding region 요소들로 open reading frame 1, 2, 3을 위해 0, 1, 2로 나타낸다.
+
+<br>
+
+## Unmapped reads
+
+grcm38을 reference로 지정하여 mapping 시에는 grch38을 reference로 두는 유전자는 mapping이 되지 않는다. 때문에 unmapped된 reads들을 다시 homosapiense reference로 Hisat2을 돌리기 위해서 grcm38 reference로 한 alignment bam 파일에서 samtools를 이용하여 unmapped reads를 추출하고 다시 samtools로 fastq 파일로 변경 후, hisat2; alignment를 진행한다.
+
+<br>
+
+### Unmapped reads를 추출하는 방법
+
+To get the **unmapped** reads from a bam file use:
+
+```bash
+samtools view -f 4 file.bam > unmapped.sam
+```
+
+the output will be in sam
+
+to get the output in bam, use:
+
+```bash
+samtools view -b -f 4 file.bam > unmapped.bam
+```
+
+To get only the **mapped** reads use the parameter `F`, which works like `-v` of `grep` and skips the alignments for a specific flag.
+
+```bash
+samtools view -b -F 4 file.bam > mapped.bam
+```
+
+From the [manual](http://samtools.sourceforge.net/samtools.shtml); there are different int codes you can use with the parameter `f`, based on what you want:
+
+> -f INT Only output alignments with all bits in INT present in the FLAG field. INT can be in hex in the format of /^0x[0-9A-F]+/ [0]
+>
+> Each bit in the FLAG field is defined as:
+>
+> ```bash
+> Flag        Chr     Description
+> 0x0001      p       the read is paired in sequencing
+> 0x0002      P       the read is mapped in a proper pair
+> 0x0004      u       the query sequence itself is unmapped
+> 0x0008      U       the mate is unmapped
+> 0x0010      r       strand of the query (1 for reverse)
+> 0x0020      R       strand of the mate
+> 0x0040      1       the read is the first read in a pair
+> 0x0080      2       the read is the second read in a pair
+> 0x0100      s       the alignment is not primary
+> 0x0200      f       the read fails platform/vendor quality checks
+> 0x0400      d       the read is either a PCR or an optical duplicate
+>   
+> ```
+
+
+
+**-f 와 -F 차이**
+
+To make sure I have this correct...
+
+The `-f` options flags to keep the reads 'Only output alignments with all bits set in INT present in the FLAG field' The `-F` option flags to remove the reads 'Only output alignments with all bits set in INT present in the FLAG field'
+
+using [this page](http://broadinstitute.github.io/picard/explain-flags.html) I explored the int meanings but I still a bit confused.
+
+In your first command:
+
+```bash
+samtools view -b -F 4 -f 8 file.bam > onlyThisEndMapped.bam
+```
+
+The reads that are unmapped are removed (`-F 4`) and the mates that are unmapped are kept (`-f 8`).
+
+<br>
+
+### Unmapped_FASTQ.sh Error
+
+```
+sudo sh Unmapped_FASTQ.sh
+
+# Error code
+
+*  SRX3266465
+Unmapped reads
+Unmapped_FASTQ.sh: 15: Unmapped_FASTQ.sh :samtools: Permission denied
+Bam to FASTQ
+Unmapped_FASTQ.sh: 18: Unmapped_FASTQ.sh: samtools: Permission denied
+```
+
+
+
+**해결방안**
+
+server1에 samtools가 PATH 지정이 안된 것 같아서 (which samtools 해도 안나옴) Unmapped_FASTQ.sh에 
+
+export PATH="/fs/bin/samtools:$PATH" 지정하여 sh 실행하니 가능해짐
+
+<br>
+
+### Hisat2_2nd.sh 중 Error
+
+```
+sudo sh hisat2_2nd.sh
+
+# Error code
+
+* SRX3266465
+	-> Hisat2
+Error, fewer reads in file specified with -2 than in file specified with -l
+termonated called after throwing an instance of 'int'
+Aborted (core dumped)
+(ERR): hisat2-align exited with value 134
+	-> Samtools_sort
+samtools sort: truncated file. Aborting
+	-> Samtools_index
+[E::hts_open_format] Failed to open file "SRX3266465.2nd.bam" : No such file or directory
+
+....동일
+```
+
+
+
+**해결방안**
+
+Paired reads가 달라서 Trimmomatic을 사용하여 1P, 2P 를 다시 1P, 1U, 2P, 2U로 4개로 다시 처리하여 1P와 2P만 사용해 다시 Hisat2 돌림.
+
 
 
 <br>
@@ -606,3 +756,7 @@ read조각들을 조립하여 사람의 전체 유전 서열을 만들어내는 
 [samtools] https://pd3.github.io/www.htslib.org/doc/samtools-1.7.html
 
 [stringtie] http://ccb.jhu.edu/software/stringtie/index.shtml?t=manual
+
+[GTF file] https://m.blog.naver.com/naturelove87/221309907279
+
+[unmapped reads] https://www.biostars.org/p/56246/
