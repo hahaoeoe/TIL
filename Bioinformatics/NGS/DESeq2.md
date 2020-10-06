@@ -14,6 +14,8 @@ dispersion: 확산, 분산
 
 comprehensive: 종합적인, 포괄적인
 
+take into account: ~을 고려하다
+
 
 
 <br>
